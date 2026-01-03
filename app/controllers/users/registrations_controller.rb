@@ -20,6 +20,7 @@ end
         data: resource
       }, status: :created
     else
+      puts resource.errors.full_messages
       render json: {
         status: { code: 422, message: "Usuário não pôde ser criado." },
         errors: resource.errors.full_messages

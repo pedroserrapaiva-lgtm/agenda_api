@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_210521) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_03_190926) do
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_210521) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
+    t.integer "contact_id"
     t.datetime "created_at", null: false
     t.string "email"
     t.string "phone"
