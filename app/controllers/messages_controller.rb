@@ -3,13 +3,17 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = current_user.messages
-    render json: @messages
+    contact = current_user.contacts.find(params[:contact_id])
+    messages = contact.messages.order(created_at: :desc)
+
+    render json: messages
   end
 
   # POST /messages
   def create
-    @message = current_user.messages.build(message_params)
+    contact = current_user.contacts.find(params[:contact_id])
+
+    @message = contact.messages.build(message_params.merge(user: current_user))
 
     if @message.save
       render json: @message, status: :created
@@ -39,6 +43,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:title, :body)
+    params.require(:message).permit(:title, :body, :email, :phone)
   end
 end

@@ -16,6 +16,17 @@ class ContactsController < ApplicationController
     end
   end
 
+  def destroy
+  contact = Contact.find_by(id: params[:id])
+
+  if contact.nil?
+    render json: { error: "Contato não encontrado" }, status: :not_found
+    return
+  end
+
+  contact.destroy
+  head :no_content
+end
   private
 
   def contact_params
