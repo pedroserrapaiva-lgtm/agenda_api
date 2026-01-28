@@ -4,7 +4,6 @@ class Users::SessionsController < Devise::SessionsController
   def create
     email = params.dig(:user, :email)
     password = params.dig(:user, :password)
-
     user = User.find_by(email: email)
 
     if user && user.valid_password?(password)
@@ -20,13 +19,13 @@ class Users::SessionsController < Devise::SessionsController
         data: {
           id: user.id,
           email: user.email,
-          name: user.name
+          name: user.name,
+          avatar_url: user.avatar_url
         },
         token: token
       }, status: :ok
 
     else
-      puts resource.errors.full_messages
       render json: {
         status: 401,
         message: "Invalid email or password."

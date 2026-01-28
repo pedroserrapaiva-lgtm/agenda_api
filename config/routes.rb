@@ -13,4 +13,10 @@ Rails.application.routes.draw do
   resources :contacts do
     resources :messages
   end
+
+  # avatar upload
+  patch "/users/avatar", to: "users#update_avatar"
+
+  # info do usuário logado
+  get "/users/me", to: "users#me"
 end

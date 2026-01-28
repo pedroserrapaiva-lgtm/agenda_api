@@ -1,6 +1,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # URL padrão para geração de links (inclui ActiveStorage)
+  config.action_controller.default_url_options = { host: "localhost", port: 3000 }
+  Rails.application.routes.default_url_options = { host: "localhost", port: 3000 }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
